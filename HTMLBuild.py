@@ -10,7 +10,7 @@ def modelLoader(name):
         load the IFC file 
     '''
     
-    model_url = "model/duplex.ifc"
+    model_url = "model/"+name+".ifc"
     start_time = time.time()
 
     if (os.path.exists(model_url)):
