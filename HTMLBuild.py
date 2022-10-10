@@ -43,26 +43,26 @@ def writeHTML(model,name):
     cont=""
     
     # ---- START OF STANDARD HTML
-    cont+=0*"\t"+"<html>\n"
+    cont+=0*"\t"+"<HTML>\n"
     # ---- ADD HEAD
-    cont+=1*"\t"+"<head>\n"
+    cont+=1*"\t"+"<HEAD>\n"
     # ---- ADD HTMLBUILD CSS - COULD ADD OTHERS HERE :)
-    cont+=2*"\t"+"<link rel='stylesheet' href='../css/html-build.css'></link>\n"
+    cont+=2*"\t"+"<LINK rel='stylesheet' href='../css/html-build.css'></LINK>\n"
     # ---- ADD HTMLBUILD JS - COULD ADD OTHERS HERE :)
-    cont+=2*"\t"+"<script src='../js/html-build.js'></script>\n"
+    cont+=2*"\t"+"<SCRIPT src='../js/html-build.js'></SCRIPT>\n"
     # ---- JQUERY - IT WOULD BE CRAZY NOT TO
-    cont+=2*"\t"+"<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js'></script>\n"
+    cont+=2*"\t"+"<SCRIPT src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js'></SCRIPT>\n"
     # ---- CLOSE HEAD
-    cont+=1*"\t"+"</head>\n"
+    cont+=1*"\t"+"</HEAD>\n"
     # ---- ADD BODY
-    cont+=1*"\t"+"<body onload=\"main()\">\n"  
+    cont+=1*"\t"+"<BODY onload=\"main()\">\n"  
     
     # ---- ADD CUSTOM HTML FOR THE BUILDING HERE
     cont+=writeCustomHTML(model)
     
     # ---- CLOSE BODY AND HTML ENTITIES
-    cont+=1*"\t"+"</body>\n"   
-    cont+=0*"\t"+"</html>\n"
+    cont+=1*"\t"+"</BODY>\n"   
+    cont+=0*"\t"+"</HTML>\n"
 
     # ---- WRITE IT OUT
     f.write(cont)
@@ -86,7 +86,7 @@ def writeCustomHTML(model):
     
     # ---- ADD PROJECT CUSTOM ENTITY
     project = model.by_type('IfcProject')[0]
-    custom+=3*"\t"+"<project- name=\"{d}\">\n".format(d=project.LongName)8
+    custom+=3*"\t"+"<project- name=\"{d}\">\n".format(d=project.LongName)
     # it looks like it would make sense to use the DOM here and append stuff to it...
     
     # ---- ADD SITE CUSTOM ENTITY
@@ -97,13 +97,10 @@ def writeCustomHTML(model):
     # ---- ADD BUILDING CUSTOM ENTITY
     custom+=5*"\t"+"<building->\n"
     
-   
-    
     # ---- ADD FLOOR CUSTOM ENTITIES
     floors = model.by_type('IfcBuildingStorey')
     floors.sort(key=lambda x: x.Elevation, reverse=True)
    
-    
     # ---- CLASSIFY THE FLOORS AS LOWER, GROUND OR UPPER AND WRITE TO CUSTOM ENTITIES
     custom+= classifyFloors(floors,site_elev)
     
